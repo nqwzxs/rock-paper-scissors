@@ -1,5 +1,5 @@
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     randomNumber = Math.floor(Math.random() * 3);
@@ -15,20 +15,45 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === "rock" && computerSelection === "paper") {
+        computerScore++;
         return "You lose! Paper beats Rock";
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
+        playerScore++;
         return "You win! Rock beats Scissors";
     } else if (playerSelection === "paper" && computerSelection === "rock") {
+        playerScore++;
         return "You win! Paper beats Rock";
     } else if (playerSelection === "paper" && computerSelection === "scissors") {
+        computerScore++;
         return "You lose! Scissors beat paper";
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
+        computerScore++;
         return "You lose! Rock beats Scissors";
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
+        playerScore++;
         return "You win! Scissors beat paper";
     } else {
         return "It's a tie!";
     }
 }
 
-console.log(playRound(computerSelection, playerSelection))
+function game() {
+    playerScore = 0;
+    computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = "rock";
+        let computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+    }
+
+    if (playerScore > computerScore) {
+        console.log(`You win! Score: ${playerScore} : ${computerScore}`);
+    } else if (playerScore < computerScore) {
+        console.log(`You lose! Score: ${playerScore} : ${computerScore}`);
+    } else {
+        console.log(`It's a tie! ${playerScore} : ${computerScore}`);
+    }
+}
+
+game();
