@@ -14,7 +14,7 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    inputValue = prompt("Choose Rock, Paper or Scissors").toLowerCase();
+    return prompt("Choose Rock, Paper or Scissors").toLowerCase();
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -45,11 +45,9 @@ function game() {
     playerScore = 0;
     computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = getPlayerChoice();
-        let computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-    }
+    let playerSelection = getPlayerChoice();
+    let computerSelection = getComputerChoice();
+    console.log(playRound(playerSelection, computerSelection));
 
     if (playerScore > computerScore) {
         console.log(`You win! Score: ${playerScore} : ${computerScore}`);
