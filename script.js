@@ -1,4 +1,7 @@
-const buttons = document.querySelectorAll("button");
+const playerButtons = document.querySelectorAll("#player button");
+const computerButtons = document.querySelectorAll("#computer button");
+const score = document.querySelector("#score");
+const result = document.querySelector("#result");
 
 let playerScore = 0;
 let computerScore = 0;
@@ -15,7 +18,7 @@ function getComputerChoice() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
+function getResult(playerSelection, computerSelection) {
     if (playerSelection === "rock" && computerSelection === "paper") {
         computerScore++;
         return "You lose! Paper beats Rock";
@@ -39,8 +42,28 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        console.log(playRound(e.target.id, getComputerChoice()));
-    })
+function finishGame() {
+    playerButtons.forEach((button) => {
+        button.removeEventListener("click", playRound);
+    });
+
+    if (playerScore === 5) {
+        result.textContent = "Congratulations! You win the game"
+    } else {
+        result.textContent = "Game over! You lose the game"
+    }
+}
+
+function playRound(e) {
+    let playerSelection = e.target.id;
+    let computerSelection = getComputerChoice();
+     
+    result.textContent = getResult(playerSelection, computerSelection);
+    score.textContent = `${playerScore} : ${computerScore}`;
+
+    if (playerScore === 5 || computerScore === 5) finishGame();
+}
+
+playerButtons.forEach((button) => {
+    button.addEventListener("click", playRound);
 });
