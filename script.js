@@ -1,5 +1,6 @@
 const playerButtons = document.querySelectorAll("#player button");
 const computerButtons = document.querySelectorAll("#computer button");
+const restartButton = document.querySelector("#restart")
 const score = document.querySelector("#score");
 const result = document.querySelector("#result");
 
@@ -52,11 +53,54 @@ function finishGame() {
     } else {
         result.textContent = "Game over! You lose the game"
     }
+
+    restartButton.style["visibility"] = "visible";
+}
+
+function removeSelectionDisplay() {
+    playerButtons.forEach((button) => {
+        button.style["background-color"] = "#eee";
+    })
+
+    computerButtons.forEach((button) => {  
+        button.style["background-color"] = "#eee";
+    })
+}
+
+function displaySelection(playerSelection, computerSelection) {
+    playerButtons.forEach((button) => {
+        if (button.id === playerSelection) {
+            button.style["background-color"] = "lightgreen";
+        }
+    })
+
+    computerButtons.forEach((button) => {
+        if (button.id === computerSelection) {
+            button.style["background-color"] = "red";
+        }
+    })
+}
+
+function restartGame() {
+    computerScore = 0;
+    playerScore = 0;
+    score.textContent = "0 : 0";
+    result.textContent = ""
+
+    removeSelectionDisplay();
+    restartButton.style["visibility"] = "hidden";
+
+    playerButtons.forEach((button) => {
+        button.addEventListener("click", playRound);
+    });
 }
 
 function playRound(e) {
     let playerSelection = e.target.id;
     let computerSelection = getComputerChoice();
+    
+    removeSelectionDisplay();
+    displaySelection(playerSelection, computerSelection)
      
     result.textContent = getResult(playerSelection, computerSelection);
     score.textContent = `${playerScore} : ${computerScore}`;
@@ -67,3 +111,5 @@ function playRound(e) {
 playerButtons.forEach((button) => {
     button.addEventListener("click", playRound);
 });
+
+restartButton.addEventListener("click", restartGame);
