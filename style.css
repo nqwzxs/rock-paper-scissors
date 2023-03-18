@@ -1,0 +1,54 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #eee;
+}
+
+#wrapper {
+    width: 1000px;
+    padding-top: 124px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 256px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.container button {
+    font-size: 86px;
+    padding: 24px;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.container#player button:hover {
+    background-color: white;
+}
+
+.container#computer button {
+    cursor: auto;
+}
+
+#result {
+    font-size: 64px;
+    margin-top: 124px;
+    text-align: center;
+}
