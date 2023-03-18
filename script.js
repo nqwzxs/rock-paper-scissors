@@ -1,3 +1,5 @@
+const buttons = document.querySelectorAll("button");
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -11,10 +13,6 @@ function getComputerChoice() {
     } else {
         return "scissors";
     }
-}
-
-function getPlayerChoice() {
-    return prompt("Choose Rock, Paper or Scissors").toLowerCase();
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -41,21 +39,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    playerScore = 0;
-    computerScore = 0;
-
-    let playerSelection = getPlayerChoice();
-    let computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-
-    if (playerScore > computerScore) {
-        console.log(`You win! Score: ${playerScore} : ${computerScore}`);
-    } else if (playerScore < computerScore) {
-        console.log(`You lose! Score: ${playerScore} : ${computerScore}`);
-    } else {
-        console.log(`It's a tie! ${playerScore} : ${computerScore}`);
-    }
-}
-
-game();
+buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        console.log(playRound(e.target.id, getComputerChoice()));
+    })
+});
